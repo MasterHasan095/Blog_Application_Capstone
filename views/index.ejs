@@ -1,3 +1,7 @@
-<%- include("partials/header.ejs") %>
+
+<%- include("partials/headTag.ejs") %>
+<%- include("partials/header.ejs", { loggedIn: loggedIn }) %>
+
 Hey Guys
 <%- include("partials/footer.ejs") %>
+

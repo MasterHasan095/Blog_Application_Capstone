@@ -5,15 +5,32 @@ import bodyParser from "body-parser";
 const PORT = 3000;
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+app.get("/", (req, res) => {
+  res.render("index.ejs", {
+    loggedIn: loggedIn
+  });
+});
+app.listen(PORT, () => {
+  console.log(`Server runnning on ${PORT}`);
+});
 
-app.get("/", (req,res) => {
-    res.render("index.ejs");
+var loggedIn = false;
+
+app.post("/login", (req, res)=>{
+
+    loggedIn = true;
+    res.render("index.ejs", {
+      loggedIn: loggedIn
+    });
 })
-app.listen(PORT, () =>{
-    console.log(`Server runnning on ${PORT}`);
+app.post("/logout", (req, res)=>{
+    loggedIn = false;
+    res.render("index.ejs", {
+        loggedIn: loggedIn
+      });
 })
 
