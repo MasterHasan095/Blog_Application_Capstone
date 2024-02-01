@@ -2,6 +2,10 @@
 <%- include("partials/headTag.ejs") %>
 <%- include("partials/header.ejs", { loggedIn: loggedIn }) %>
 
-Hey Guys
+<hr>
+<form action = "/addPost" method="get">
+    <input type="submit" value="Add A Post">
+</form>
+<hr>
 <%- include("partials/footer.ejs") %>
 

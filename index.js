@@ -5,6 +5,9 @@ import bodyParser from "body-parser";
 const PORT = 3000;
 const app = express();
 
+//All Posts 
+var posts = []
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
@@ -32,5 +35,11 @@ app.post("/logout", (req, res)=>{
     res.render("index.ejs", {
         loggedIn: loggedIn
       });
+})
+
+app.get("/addPost", (req,res)=>{
+  res.render("add.ejs", {
+    loggedIn: loggedIn
+  });
 })
 
