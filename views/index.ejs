@@ -1,11 +1,21 @@
+<%- include("partials/headTag.ejs") %> <%- include("partials/header.ejs", {
+loggedIn: loggedIn }) %>
 
-<%- include("partials/headTag.ejs") %>
-<%- include("partials/header.ejs", { loggedIn: loggedIn }) %>
+<hr />
+<ul>
+    <% if (locals.posts && locals.posts.length > 0) { %>
+        <% posts.forEach(function(post) { %>
+            <li><%= post.title %></li>
+        <% }); %>
+    <% } else { %>
+        <li>No posts available</li>
+    <% } %>
+</ul>
 
-<hr>
-<form action = "/addPost" method="get">
-    <input type="submit" value="Add A Post">
+
+<hr />
+<form action="/addPost" method="get">
+  <input type="submit" value="Add A Post" />
 </form>
-<hr>
+<hr />
 <%- include("partials/footer.ejs") %>
-

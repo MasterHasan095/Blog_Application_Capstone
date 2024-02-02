@@ -38,8 +38,24 @@ app.post("/logout", (req, res)=>{
 })
 
 app.get("/addPost", (req,res)=>{
+  
   res.render("add.ejs", {
     loggedIn: loggedIn
   });
 })
+
+
+app.post("/addPost", (req, res)=>{
+  var title = req.body.title;
+  var content = req.body.content;
+  var data = {
+    title: title,
+    content: content
+  }
+  posts.push(data);
+  res.render("index.ejs", {
+    loggedIn: loggedIn,
+    posts: posts
+  })
+});
 
