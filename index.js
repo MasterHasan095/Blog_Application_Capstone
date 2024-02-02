@@ -6,7 +6,14 @@ const PORT = 3000;
 const app = express();
 
 //All Posts 
-var posts = []
+var posts = [{
+  title: "Mate",
+  content: "Hey, australian Mate"
+},
+{
+  title: "Not a mate",
+  content: "I am indian"
+}]
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -14,9 +21,11 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.render("index.ejs", {
-    loggedIn: loggedIn
+    loggedIn: loggedIn,
+    posts: posts
   });
 });
+
 app.listen(PORT, () => {
   console.log(`Server runnning on ${PORT}`);
 });
@@ -27,20 +36,23 @@ app.post("/login", (req, res)=>{
 
     loggedIn = true;
     res.render("index.ejs", {
-      loggedIn: loggedIn
+      loggedIn: loggedIn,
+      posts: posts
     });
 })
 app.post("/logout", (req, res)=>{
     loggedIn = false;
     res.render("index.ejs", {
-        loggedIn: loggedIn
+        loggedIn: loggedIn,
+        posts: posts
       });
 })
 
 app.get("/addPost", (req,res)=>{
   
   res.render("add.ejs", {
-    loggedIn: loggedIn
+    loggedIn: loggedIn,
+    posts: posts
   });
 })
 
@@ -58,4 +70,19 @@ app.post("/addPost", (req, res)=>{
     posts: posts
   })
 });
+
+app.post("/deletePost",(req, res)=>{
+  const toBeDeleted = req.body.title;
+  console.log(toBeDeleted);
+
+  posts.forEach((value, index)=>{
+    if (value["title"] == toBeDeleted){
+      posts.splice(index, 1);
+    }
+  })
+  res.render("index.ejs", {
+    loggedIn: loggedIn,
+    posts: posts
+  })
+})
 

@@ -2,16 +2,24 @@
 loggedIn: loggedIn }) %>
 
 <hr />
-<ul>
-    <% if (locals.posts && locals.posts.length > 0) { %>
-        <% posts.forEach(function(post) { %>
-            <li><%= post.title %></li>
-        <% }); %>
-    <% } else { %>
-        <li>No posts available</li>
-    <% } %>
-</ul>
-
+<section id="posts">
+  <% if (locals.posts && locals.posts.length> 0) { %> <%
+  posts.forEach(function(post) { %>
+  <div class="post">
+    <h2 class="post-title"> <%= post.title %> </h2> 
+    <p class="post-content"> <%= post.content  %></p>
+    <form action = "/deletePost" method="post">
+        <input type="hidden" name = "title" value = <%- post.title %> >
+        <input type="submit" value="Delete Post">
+    </form>
+    </div>
+  <% }); %>
+   <% } else { %>
+  <div>
+    No posts available
+    </div>
+  <% } %>
+</section>
 
 <hr />
 <form action="/addPost" method="get">
